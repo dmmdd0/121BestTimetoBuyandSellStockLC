@@ -4,15 +4,15 @@ import "fmt"
 
 func main() {
 	prices := []int{7, 1, 5, 3, 6, 4}
+	prices = []int{2, 1, 2, 1, 0, 1, 2}
 	prices = []int{2, 4, 1}
 	prices = []int{5, 8, 2, 3, 1}
-	prices = []int{2, 1, 2, 1, 0, 1, 2}
 
+	fmt.Println(maxProfitOld(prices))
 	fmt.Println(maxProfit(prices))
 }
 
-func maxProfit(prices []int) int {
-	type stock int
+func maxProfitOld(prices []int) int {
 
 	var min, max, profit int
 	var day int
@@ -30,8 +30,24 @@ func maxProfit(prices []int) int {
 		if profit < max-min {
 			profit = max - min
 		}
-
 	}
-
+	return profit
+}
+func maxProfit(price []int) int {
+	min := price[0] //first vallue
+	max := price[0]
+	profit := 0
+	for i := range price {
+		if price[i] > max {
+			max = price[i]
+		}
+		if price[i] < min {
+			min = price[i]
+			max = min
+		}
+		if max-min > profit {
+			profit = max - min
+		}
+	}
 	return profit
 }
